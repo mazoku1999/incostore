@@ -50,7 +50,7 @@ class _CustomButtonState extends State<CustomButton> {
             widget.text,
             style: GoogleFonts.poppins(
               fontSize: 17,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),

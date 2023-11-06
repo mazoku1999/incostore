@@ -30,12 +30,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 children: [
                   Text(
                     'Productos nuevos',
-                    style: GoogleFonts.montserrat(
-                      letterSpacing: -1,
-                      height: 0.9,
-                      fontWeight: FontWeight.w800,
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
                       fontSize: 23,
-                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w600,
                     ),
                     // Quitar altura o espacio en cada salto de linea
                     softWrap: false,

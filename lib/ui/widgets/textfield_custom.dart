@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatefulWidget {
   final VoidCallback onPressed;
@@ -6,6 +7,7 @@ class CustomTextField extends StatefulWidget {
   final Color? containerColor;
   final Color? cursorColor;
   final TextEditingController? controller;
+  final bool? obscureText;
 
   const CustomTextField({
     Key? key,
@@ -14,6 +16,7 @@ class CustomTextField extends StatefulWidget {
     this.containerColor,
     this.cursorColor,
     this.controller,
+    this.obscureText,
   }) : super(key: key);
 
   @override
@@ -42,7 +45,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return GestureDetector(
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        width: MediaQuery.of(context).size.width * 0.7,
+        width: MediaQuery.of(context).size.width * 0.8,
         height: 60,
         decoration: BoxDecoration(
           color: widget.containerColor ?? color,
@@ -65,6 +68,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         child: Align(
           alignment: Alignment.centerLeft,
           child: TextField(
+            style: GoogleFonts.poppins(
+              color: Colors.black.withOpacity(0.6),
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            ),
+            obscureText: widget.obscureText ?? false,
             controller: widget.controller,
             cursorColor: widget.cursorColor ?? Colors.black,
             onTap: () {
@@ -80,7 +89,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
             },
             focusNode: _focusNode,
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 15, right: 15),
+              suffixIcon: isPressed
+                  ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          widget.controller!.clear();
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.clear_rounded,
+                      ),
+                      // padding: EdgeInsets.only(bottom: 13),
+                    )
+                  : null,
+              contentPadding:
+                  EdgeInsets.only(left: 15, right: 15, top: isPressed ? 12 : 0),
               hintText: widget.hintText ?? "Correo",
               border: InputBorder.none,
             ),
