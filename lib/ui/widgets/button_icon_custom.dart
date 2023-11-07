@@ -6,12 +6,14 @@ class CustomButtonIcon extends StatefulWidget {
   final IconData icon;
   final VoidCallback onPressed;
   final double? width;
+  final Color? colorContainerIcon;
 
   CustomButtonIcon(
       {required this.text,
       required this.icon,
       required this.onPressed,
-      this.width});
+      this.width,
+      this.colorContainerIcon});
 
   @override
   _CustomButtonIconState createState() => _CustomButtonIconState();
@@ -65,7 +67,7 @@ class _CustomButtonIconState extends State<CustomButtonIcon> {
                   : MediaQuery.of(context).size.width * 0.140,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: Colors.indigo.shade300,
+                color: widget.colorContainerIcon ?? Colors.indigo.shade300,
               ),
               child: Center(
                 child: Icon(
