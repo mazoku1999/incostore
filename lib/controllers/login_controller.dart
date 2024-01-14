@@ -48,7 +48,6 @@ class LoginController {
       );
 
       if (response.statusCode == 200) {
-        print('imprmiendo desde back: ${response.data['status']}');
         return LoginResponse(
             data: response.data, success: response.data['status']);
       } else {
