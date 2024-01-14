@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:incostore/ui/card_productos.dart';
 
-import '../../../../models/destination.dart';
+import '../models/products.dart';
 
 class CaruselProductos extends StatefulWidget {
   final double padding;
@@ -67,7 +67,8 @@ class _CaruselProductosState extends State<CaruselProductos> {
     }).toList();
     setState(() {
       data = data;
-      print(data);
+      // ordenar de mayor a menor
+      data.sort((a, b) => b.price.compareTo(a.price));
     });
   }
 

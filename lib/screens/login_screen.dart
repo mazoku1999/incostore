@@ -140,18 +140,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: MediaQuery.of(context).size.width * 0.65,
                           text: "Ingresar",
                           icon: Icons.login,
-                          onPressed: () {
+                          onPressed: () async {
                             LoginController loginController = LoginController(
                                 email: emailController.text,
                                 password: passwordController.text);
-                            loginController.login().then((value) => {
+                            await loginController.login().then((value) => {
                                   if (value.success)
                                     {
-                                      print(value.data),
+                                      print(
+                                          'Imprimiendo el valor: ${value.data}'),
                                       Navigator.pushNamed(context, '/home')
                                     }
                                   else
                                     {
+                                      print(
+                                          'Imprimiendo el valor else: ${value.data}'),
                                       showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
@@ -169,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ),
                                           title: const Text('Error'),
                                           content: Text(
-                                            value.data?['error'],
+                                            value.data['message'],
                                             style: GoogleFonts.poppins(
                                               color:
                                                   Colors.black.withOpacity(0.6),

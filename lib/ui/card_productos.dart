@@ -1,8 +1,9 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:incostore/models/destination.dart';
+import 'package:incostore/models/products.dart';
 
 import '../../../../utils/constants.dart';
 
@@ -23,8 +24,8 @@ class CardProducto extends StatelessWidget {
   }) : super(key: key);
 
   Widget image() {
-    return Image.network(
-      details.image,
+    return CachedNetworkImage(
+      imageUrl: details.image,
       fit: BoxFit.cover,
       alignment: Alignment(-imageOffset + indexFactor * index, 0),
     );
@@ -153,9 +154,11 @@ class CardProducto extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.primaries[index % Colors.primaries.length * 5]
+              //colores primarios random
+              color: Colors.primaries[index % Colors.primaries.length * 1]
                   .withOpacity(0.6),
-              offset: Offset(12, 12),
+
+              offset: const Offset(12, 12),
             ),
           ],
         ),

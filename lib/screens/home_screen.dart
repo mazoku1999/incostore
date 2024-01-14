@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 4),
           Text(
-            'El futuro es hoy viejo!',
+            'Productos nuevos cada dia!',
             style: TextStyle(
               color: kSecondaryColor.withOpacity(0.6),
               fontSize: 16,
@@ -139,41 +139,57 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  int contador = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          // controller: _scrollController,
-          child: Column(
-            children: [
-              appBar(),
-              const SizedBox(height: 24),
-              header(),
-              const SizedBox(height: 24),
-              searchBar(),
-              const SizedBox(height: 36),
-              categories(),
-              const SizedBox(height: 16),
-              const CaruselProductos(
-                padding: HomeScreen._padding,
-                spacing: HomeScreen._spacing,
-              ),
-              const SizedBox(height: 36),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: HomeScreen._padding),
-                child: Text(
-                  "Todos los productos:",
-                  style: GoogleFonts.poppins(
-                    color: Colors.black.withOpacity(0.9),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+    return WillPopScope(
+      onWillPop: () async {
+        // Mostrar un mensaje de snack bar para indicar al usuario que presione nuevamente para salir
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content:
+              Text('Presiona atrás nuevamente para salir de la aplicación'),
+        ));
+        contador++;
+        if (contador == 2) {
+          Navigator.pop(context);
+        }
+        return false; // No salgas de la aplicación todavía
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            // controller: _scrollController,
+            child: Column(
+              children: [
+                appBar(),
+                const SizedBox(height: 24),
+                header(),
+                const SizedBox(height: 24),
+                searchBar(),
+                const SizedBox(height: 36),
+                categories(),
+                const SizedBox(height: 16),
+                const CaruselProductos(
+                  padding: HomeScreen._padding,
+                  spacing: HomeScreen._spacing,
+                ),
+                const SizedBox(height: 36),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: HomeScreen._padding),
+                  child: Text(
+                    "Todos los productos:",
+                    style: GoogleFonts.poppins(
+                      color: Colors.black.withOpacity(0.9),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              const GridB(),
-            ],
+                const GridB(),
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
         ),
       ),

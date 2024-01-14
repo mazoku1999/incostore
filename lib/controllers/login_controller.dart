@@ -48,23 +48,15 @@ class LoginController {
       );
 
       if (response.statusCode == 200) {
-        // Respuesta exitosa
-        return LoginResponse(data: response.data, success: true);
+        print('imprmiendo desde back: ${response.data['status']}');
+        return LoginResponse(
+            data: response.data, success: response.data['status']);
       } else {
-        // Otro estado de error
-        return LoginResponse(data: response.data, success: false);
+        return LoginResponse(data: "Error", success: false);
       }
     } on DioException catch (e) {
-      if (e.response?.statusCode == 401) {
-        // Estado 401: Usuario y/o contraseña incorrectos
-        return LoginResponse(data: e.response?.data, success: false);
-      } else {
-        // Otros errores de red
-        return LoginResponse(data: e.response?.data, success: false);
-      }
-    } catch (e) {
-      // Otro error
-      return LoginResponse(data: e, success: false);
+      print(e.response?.statusCode);
+      return LoginResponse(data: 'Error', success: false);
     }
   }
 }
